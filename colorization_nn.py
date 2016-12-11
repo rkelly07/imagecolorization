@@ -5,7 +5,7 @@ from tflearn import *
 #network = dropout(network, 0.5)
 
 # Building deep neural network, input is black and white photo
-input_layer = tflearn.input_data(shape=[None, 256, 256, 1])
+input_layer = input_data(shape=[None, 256, 256, 1])
 
 #conv1 256x256x1
 network = conv_2d(input_layer, 64, 3, activation='relu')
