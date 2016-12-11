@@ -1,6 +1,9 @@
 #Attempt at conv nn as defined by http://richzhang.github.io/colorization/
 from tflearn import *
+import numpy as np
 
+X = np.load('flowersbw.npy')
+Y = np.load('flowers.npy')
 #Can use dropout to throw away some data randomly during training to prevent over-fitting
 #network = dropout(network, 0.5)
 
@@ -54,13 +57,13 @@ network = conv_2d_transpose(network, 128 , 3, [128,128,128], activation='relu')
 network = conv_2d(network, 64, 3, activation='relu')
 network = conv_2d_transpose(network, 3 , 3, [256,256,3], activation='relu')
 
-loss = losses.L2(network - predicted_images)
+loss = losses.L2(Y-network)
 
-network = tflearn.regression(network, optimizer='Adam',
+network = regression(network, optimizer='Adam',
                      loss=loss,
                      learning_rate=0.0001)
 
-model = tflearn.DNN(network, checkpoint_path='saveFiles/colorizer',
+model = DNN(network, checkpoint_path='saveFiles/colorizer',
                     max_checkpoints=2, tensorboard_verbose=2, tensorboard_dir="./tflearn_logs/")
 
 #model.load('what I called it')
@@ -69,6 +72,6 @@ model.fit(X, Y, n_epoch=1000, validation_set=0.1, shuffle=True,
           show_metric=True, batch_size=32, snapshot_step=1000,
           snapshot_epoch=False, run_id='flowers')
 
-model.save('what I want to call it')
+model.save('Colorize')
 
 #Probability Distribution?
