@@ -17,37 +17,37 @@ input_layer = tf.reshape(input_layer, [-1,256,256,1])
 network = conv_2d(input_layer, 64, 3, activation='relu', name='Conv1_1')
 
 network = conv_2d(network, 64, 3, activation='relu', strides=2, name='Conv1_2')
-network = batch_normalization(network)
+network = local_response_normalization(network)
 
 #conv2 128x128x64
 network = conv_2d(network, 128, 3, activation='relu',name='Conv2_1')
 network = conv_2d(network, 128, 3, activation='relu', strides=2, name='Conv2_2')
-network = batch_normalization(network)
+network = local_response_normalization(network)
 
 #conv3 64x64x128
 network = conv_2d(network, 256, 3, activation='relu',name='Conv3_1')
 network = conv_2d(network, 256, 3, activation='relu', strides=2,name='Conv3_2')
-network = batch_normalization(network)
+network = local_response_normalization(network)
 
 #conv4 32x32x256
 network = conv_2d(network, 512, 3, activation='relu',name='Conv4_1')
 network = conv_2d(network, 512, 3, activation='relu',name='Conv4_2')
-network = batch_normalization(network)
+network = local_response_normalization(network)
 
 #conv5 32x32x512
 network = conv_2d(network, 512, 3, activation='relu',name='Conv5_1')
 network = conv_2d(network, 512, 3, activation='relu', name='Conv5_2')
-network = batch_normalization(network)
+network = local_response_normalization(network)
 
 #conv6 32x32x512
 network = conv_2d(network, 512, 3, activation='relu', name='Conv6_1')
 network = conv_2d(network, 512, 3, activation='relu', name='Conv6_2')
-network = batch_normalization(network)
+network = local_response_normalization(network)
 
 #conv7 32x32x512
 network = conv_2d(network, 512, 3, activation='relu', name='Conv7_1')
 network = conv_2d(network, 512, 3, activation='relu', name='Conv7_2')
-network = batch_normalization(network)
+network = local_response_normalization(network)
 
 #conv8 32x32x512
 network = conv_2d(network, 256, 3, activation='relu',name='Conv8_1')
